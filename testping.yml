@@ -1,0 +1,12 @@
+---
+- hosts: all
+  gather_facts: yes
+  become: yes
+  tasks:
+    - name: Ping hosts
+      ping:
+      register: ping_result
+
+    - name: Display host statuses
+      debug:
+        var: ping_result.failed | difference(ping_result.skipped)
